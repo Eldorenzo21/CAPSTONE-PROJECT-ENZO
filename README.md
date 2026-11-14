@@ -17,4 +17,4 @@ API key, which is stored only in their browser's localStorage.
 Open `index.html` in a browser.
 
 ## Live site
-(Add your Netlify URL here)
+https://brilliant-meringue-233e04.netlify.app/
