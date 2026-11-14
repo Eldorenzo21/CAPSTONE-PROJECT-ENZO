@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Minimal AI Chat</title>
+  <meta name="description" content="A minimal AI chat app using OpenRouter. Bring your own API key.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip" href="#question">Skip to question box</a>
+
+  <header class="site-header">
+    <h1>Minimal AI Chat</h1>
+    <p>Ask a question. Your own OpenRouter key powers the answer.</p>
+  </header>
+
+  <main>
+    <section class="panel" aria-labelledby="key-heading">
+      <h2 id="key-heading">API key settings</h2>
+      <form id="key-form" novalidate>
+        <label for="api-key">OpenRouter API key</label>
+        <input id="api-key" name="api-key" type="password" autocomplete="off" placeholder="sk-or-v1-...">
+        <div class="row">
+          <button type="submit" id="save-key">Save key</button>
+          <button type="button" id="forget-key" class="secondary">Forget key</button>
+        </div>
+        <p id="key-status" class="status" role="status"></p>
+        <p class="hint">Your key stays in this browser only. Get one free at openrouter.ai.</p>
+      </form>
+    </section>
+
+    <section class="panel" aria-labelledby="chat-heading">
+      <h2 id="chat-heading">Conversation</h2>
+      <div id="messages" class="messages" aria-live="polite">
+        <p id="empty" class="empty">No questions yet. Type one below.</p>
+      </div>
+
+      <form id="ask-form" novalidate>
+        <label for="question">Your question</label>
+        <textarea id="question" name="question" rows="4" placeholder="Ask anything..."></textarea>
+        <p id="ask-error" class="error" role="alert" hidden></p>
+        <div class="row">
+          <button type="submit" id="send">Send</button>
+          <span id="thinking" class="thinking" hidden>Thinking...</span>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>CS 121 Capstone &middot; Fall 2026 &middot; Built by Enzo Massol</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
