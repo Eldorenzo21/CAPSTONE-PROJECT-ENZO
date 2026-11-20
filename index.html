@@ -3,54 +3,88 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Minimal AI Chat</title>
-  <meta name="description" content="A minimal AI chat app using OpenRouter. Bring your own API key.">
+  <title>TUSK AI</title>
+  <meta name="description" content="TUSK AI: a minimal AI chat using OpenRouter. Bring your own API key.">
+  <link rel="icon" type="image/svg+xml" href="logo.svg">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <a class="skip" href="#question">Skip to question box</a>
 
-  <header class="site-header">
-    <h1>Minimal AI Chat</h1>
-    <p>Ask a question. Your own OpenRouter key powers the answer.</p>
-  </header>
-
-  <main>
-    <section class="panel" aria-labelledby="key-heading">
-      <h2 id="key-heading">API key settings</h2>
-      <form id="key-form" novalidate>
+  <!-- Welcome screen: name + API key (no account, nothing leaves the browser except questions to OpenRouter) -->
+  <section id="welcome" class="welcome" aria-labelledby="welcome-title">
+    <div class="card">
+      <img class="logo big" src="logo.svg" alt="TUSK AI logo: the Stand Tusk" width="72" height="72">
+      <h1 id="welcome-title">TUSK AI</h1>
+      <p class="tag">Your own AI assistant. No account needed: your name and key stay in this browser.</p>
+      <form id="welcome-form" novalidate>
+        <label for="name">Your name</label>
+        <input id="name" name="name" type="text" autocomplete="given-name" placeholder="Enzo">
         <label for="api-key">OpenRouter API key</label>
         <input id="api-key" name="api-key" type="password" autocomplete="off" placeholder="sk-or-v1-...">
+        <p id="welcome-error" class="error" role="alert"></p>
+        <p id="welcome-note" class="note" role="status"></p>
         <div class="row">
-          <button type="submit" id="save-key">Save key</button>
-          <button type="button" id="forget-key" class="secondary">Forget key</button>
+          <button type="submit" id="save-key">Save &amp; start</button>
+          <button type="button" id="forget-key" class="ghost">Forget key</button>
         </div>
-        <p id="key-status" class="status" role="status"></p>
-        <p class="hint">Your key stays in this browser only. Get one free at openrouter.ai.</p>
+        <p class="notice">Privacy: your questions and any attached file are sent to OpenRouter and its model provider. Use non-sensitive test data only.</p>
       </form>
-    </section>
+      <p class="credit">CS 121 Capstone &middot; Fall 2026 &middot; Built by Enzo Massol</p>
+    </div>
+  </section>
 
-    <section class="panel" aria-labelledby="chat-heading">
-      <h2 id="chat-heading">Conversation</h2>
-      <div id="messages" class="messages" aria-live="polite">
-        <p id="empty" class="empty">No questions yet. Type one below.</p>
+  <!-- Chat screen -->
+  <div id="app" class="app" hidden>
+    <header class="topbar">
+      <div class="brand">
+        <img class="logo" src="logo.svg" alt="TUSK AI logo" width="36" height="36">
+        <span>TUSK AI</span>
+        <span class="model">Model: openrouter/free</span>
       </div>
+      <div class="actions">
+        <button type="button" id="new-chat" class="ghost small">New chat</button>
+        <details id="menu" class="menu">
+          <summary class="ghost small">More</summary>
+          <div class="menu-list">
+            <button type="button" id="reopen-chat">Reopen saved chat</button>
+            <button type="button" id="clear-history">Clear saved history</button>
+            <button type="button" id="settings-btn">Name and key settings</button>
+            <button type="button" id="forget-key-menu">Forget key</button>
+            <button type="button" id="theme-btn">Dark mode</button>
+          </div>
+        </details>
+      </div>
+    </header>
 
-      <form id="ask-form" novalidate>
-        <label for="question">Your question</label>
-        <textarea id="question" name="question" rows="4" placeholder="Ask anything..."></textarea>
-        <p id="ask-error" class="error" role="alert" hidden></p>
-        <div class="row">
-          <button type="submit" id="send">Send</button>
-          <span id="thinking" class="thinking" hidden>Thinking...</span>
+    <main id="messages" class="messages" aria-live="polite">
+      <div id="empty" class="empty">
+        <img class="logo big" src="logo.svg" alt="" width="72" height="72">
+        <h2 id="greeting">Hello</h2>
+        <p>What can I help you with today?</p>
+        <div class="suggs">
+          <button type="button" class="sugg" data-q="Explain the client/server model in simple terms.">Explain client/server</button>
+          <button type="button" class="sugg" data-q="Give me 3 tips for studying JavaScript.">Study tips</button>
+          <button type="button" class="sugg" data-q="Write a short poem about the web.">Write a poem</button>
         </div>
-      </form>
-    </section>
-  </main>
+      </div>
+    </main>
 
-  <footer>
-    <p>CS 121 Capstone &middot; Fall 2026 &middot; Built by Enzo Massol</p>
-  </footer>
+    <p id="status" class="status" role="status">Status: Ready</p>
+
+    <form id="ask-form" class="composer" novalidate>
+      <label for="question" class="qlabel">Your question</label>
+      <textarea id="question" name="question" rows="1" placeholder="Ask TUSK AI anything..."></textarea>
+      <div class="composer-row">
+        <div class="left">
+          <label class="attach" for="file"><span aria-hidden="true">+</span> Attach .txt<input id="file" class="sr" type="file" accept=".txt,text/plain"></label>
+          <span id="file-chip" class="fchip" hidden><span id="file-name"></span> <button type="button" id="remove-file" class="ghost small">Remove</button></span>
+        </div>
+        <button type="submit" id="send">Send</button>
+      </div>
+      <p class="fine">Questions and attached files are sent to OpenRouter and its model provider. Enter sends, Shift+Enter adds a line.</p>
+    </form>
+  </div>
 
   <script src="script.js"></script>
 </body>
