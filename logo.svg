@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="TUSK AI logo: an ivory tusk">
+  <rect width="64" height="64" rx="14" fill="#1f4fd8"/>
+  <path d="M16 12 C 12 38, 30 58, 52 50 C 40 46, 32 36, 34 12 Z" fill="#f7f0df" stroke="#14202e" stroke-width="2.5" stroke-linejoin="round"/>
+  <ellipse cx="25" cy="12" rx="9" ry="3.5" fill="#fffaf0" stroke="#14202e" stroke-width="2.5"/>
+  <path d="M22 19 C 21 32, 29 42, 41 46" fill="none" stroke="#d9cdb2" stroke-width="2" stroke-linecap="round"/>
+</svg>
